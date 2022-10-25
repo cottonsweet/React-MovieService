@@ -14,29 +14,22 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const Title = () => (
-      <h3 id="title" onMouseEnter={() => console.log("마우스다 !")}>
-        안녕 !
-      </h3>
-    );
+    let counter = 0;
+    const countUp = () => {
+      counter += 1;
+      render();
+    };
 
-    const Button = () => (
-      <button
-        style={{
-          backgroundColor: "tomato",
-          color: "white",
-        }}
-        onClick={() => console.log("클릭됨 !")}
-      >
-        클릭해 !
-      </button>
-    );
+    const render = () => {
+      ReactDOM.render(<Container />, root);
+    };
     const Container = () => (
       <div>
-        <Title />
-        <Button />
+        {" "}
+        <h3 id="title">총 클릭수: {counter}</h3>
+        <button onClick={countUp}>클릭해 !</button>
       </div>
     );
-    ReactDOM.render(<Container />, root);
+    render();
   </script>
 </html>

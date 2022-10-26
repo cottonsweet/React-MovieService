@@ -13,8 +13,7 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    let root = document.getElementById("root");
-    function App() {
+    function MinutesToHours() {
       const [amount, setAmount] = React.useState(0);
       const [flipped, setFlipped] = React.useState(false);
       const onChange = (e) => {
@@ -28,8 +27,6 @@
       };
       return (
         <div>
-          {" "}
-          <h1 id="title">시간 변환기</h1>
           <div>
             <label htmlFor="minutes">분</label>
             <input value={flipped ? amount * 60 : amount} id="minutes" placeholder="분" type="number" onChange={onChange} disabled={flipped} />
@@ -43,6 +40,61 @@
         </div>
       );
     }
+
+    function KmToMiles() {
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+
+      const onChange = (e) => {
+        setAmount(e.target.value);
+      };
+
+      const reset = () => {
+        setAmount(0);
+      };
+
+      const onClick = () => {
+        reset();
+        setFlipped(!flipped);
+        return;
+      };
+
+      return (
+        <div>
+          <div>
+            <input onChange={onChange} value={flipped ? amount * 1.609344 : amount} disabled={flipped} placeholder="Km" />
+          </div>
+          <div>
+            <input onChange={onChange} value={!flipped ? amount / 1.609344 : amount} disabled={!flipped} placeholder="Mile" />
+          </div>
+          <button onClick={reset}>초기화</button>
+          <button onClick={onClick}>변환</button>
+        </div>
+      );
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState("noting");
+      const onSelect = (e) => {
+        setIndex(e.target.value);
+      };
+      console.log(index);
+      return (
+        <div>
+          <h1 id="title"> 단위 변환 계산기 </h1>
+          <select value={index} onChange={onSelect}>
+            <option value="noting">어떤걸 변환하실지 선택 해주세요</option>
+            <option value="0"> 분 & 시간 변환</option>
+            <option value="1">KM & Miles 변환</option>
+          </select>
+          <hr />
+          {index === "noting" ? "변환하고 싶은 항목을 선택해주셔야 합니다." : null}
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
+        </div>
+      );
+    }
+    let root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
 </html>

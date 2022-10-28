@@ -22,6 +22,12 @@ function App() {
         <input onChange={onChange} value={toDo} type="text" placeholder="할일을 적어주세요" />
         <button>할일 추가</button>
       </form>
+      <hr />
+      <ul>
+        {toDos.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }

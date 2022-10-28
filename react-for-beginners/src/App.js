@@ -26,7 +26,7 @@ function SelectCoins({ coins }) {
   const [btc, setBtc] = useState(0);
   const onChange = (e) => {
     const value = e.target.value / 20501.39;
-    setBtc(value.toFixed());
+    setBtc(value.toFixed(5));
   };
   return (
     <div>

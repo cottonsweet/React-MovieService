@@ -1,5 +1,4 @@
 function Detail() {
-  return <h1>디테일</h1>;
+  return <h1>Detail</h1>;
 }
-
 export default Detail;
